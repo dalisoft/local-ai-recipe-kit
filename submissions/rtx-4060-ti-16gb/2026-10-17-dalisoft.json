@@ -4,7 +4,7 @@
  "handle": "dalisoft",
  "target": "qwen3.8-27b-gsq3-dflash2",
  "launch": {
-  "image": "source-build: roofkid/ninfer-4080 rtx4080-port v0.6.2, local MSVC/CUDA 13.4 build (sm_89). No Windows container exists; upstream publishes roofkid/ninfer-4080:gsq3 for Linux/Docker only. Windows/MSVC compatibility patch included in measurements/ninfer-windows-msvc.patch",
+  "image": "source-build: roofkid/ninfer-4080 rtx4080-port v0.6.2 @ 2469b575, local MSVC/CUDA 13.4 build (sm_89). No Windows container exists; upstream publishes roofkid/ninfer-4080:gsq3 for Linux/Docker only. Windows/MSVC portability patch: measurements/ninfer-windows-msvc.patch (kit branch ninfer-rtx4080)",
   "args": [
    "ninfer-serve",
    "<models dir>/qwen3_8_27b_gsq3.ninfer",
@@ -96,301 +96,142 @@
  },
  "speed": {
   "status": "DONE",
-  "config": "ninfer-4080 rtx4080-port v0.6.2 source build sm_89; TRIPLICATE (reps 3, dec-reps 3); rk4v4-e8 KV; max-context 102400; kv-capacity 102400; host-kv-mib 4096; prefill-chunk 2688; spec mtp draft 3 + ngram chain; max-concurrency 1; pending-timeout 20min (harness enablement); vision; preserve-thinking",
+  "config": "ninfer DFlash2 K=7 (rk4v4-e8, 100k); TRIPLICATE reps=3 dec-reps=3; submission update for PR #10",
   "prefill": {
    "8192": {
-    "median": 1043.3,
-    "min": 1039.1,
-    "max": 1044.5,
+    "median": 1147.1,
+    "min": 1134.1,
+    "max": 1149.7,
     "n": 3,
     "all": [
-     1039.1,
-     1043.3,
-     1044.5
+     1147.1,
+     1134.1,
+     1149.7
     ]
    },
    "16384": {
-    "median": 1030.1,
-    "min": 1027.1,
-    "max": 1033.2,
+    "median": 1119.8,
+    "min": 1117.8,
+    "max": 1121.2,
     "n": 3,
     "all": [
-     1033.2,
-     1030.1,
-     1027.1
+     1121.2,
+     1119.8,
+     1117.8
     ]
    },
    "32768": {
-    "median": 962.4,
-    "min": 958.1,
-    "max": 969.5,
+    "median": 1051.6,
+    "min": 1049.6,
+    "max": 1053.5,
     "n": 3,
     "all": [
-     969.5,
-     958.1,
-     962.4
+     1053.5,
+     1049.6,
+     1051.6
     ]
    },
    "65536": {
-    "median": 870.0,
-    "min": 869.5,
-    "max": 870.3,
+    "median": 932.0,
+    "min": 930.1,
+    "max": 937.7,
     "n": 3,
     "all": [
-     869.5,
-     870.0,
-     870.3
+     932.0,
+     937.7,
+     930.1
     ]
    }
   },
   "decode": {
    "C1": {
     "aggregate": {
-     "median": 16.82,
-     "min": 16.31,
-     "max": 17.56,
+     "median": 16.78,
+     "min": 16.73,
+     "max": 16.83,
      "n": 3,
      "all": [
-      16.82,
-      17.56,
-      16.31
+      16.83,
+      16.78,
+      16.73
      ]
     },
     "per_stream_mean": {
-     "median": 50.04,
-     "min": 43.32,
-     "max": 111.42,
+     "median": 60.93,
+     "min": 54.49,
+     "max": 127.84,
      "n": 3,
      "all": [
-      43.32,
-      50.04,
-      111.42
+      54.49,
+      60.93,
+      127.84
      ]
     },
-    "gpu_power_w_mean": 152.3,
+    "gpu_power_w_mean": 160.5,
     "rounds": [
      {
-      "aggregate": 16.82,
-      "tokens": 2548,
-      "ttft_max": 0.34,
+      "aggregate": 16.83,
+      "tokens": 2314,
+      "ttft_max": 0.33,
       "finish": [
        "stop"
       ]
      },
      {
-      "aggregate": 17.56,
-      "tokens": 2875,
+      "aggregate": 16.78,
+      "tokens": 2247,
       "ttft_max": 0.48,
       "finish": [
-       "length"
-      ]
-     },
-     {
-      "aggregate": 16.31,
-      "tokens": 1199,
-      "ttft_max": 0.44,
-      "finish": [
-       "length"
-      ]
-     }
-    ]
-   },
-   "C2": {
-    "aggregate": {
-     "median": 17.8,
-     "min": 17.14,
-     "max": 18.04,
-     "n": 3,
-     "all": [
-      18.04,
-      17.8,
-      17.14
-     ]
-    },
-    "per_stream_mean": {
-     "median": 52.2,
-     "min": 48.61,
-     "max": 116.59,
-     "n": 3,
-     "all": [
-      48.61,
-      52.2,
-      116.59
-     ]
-    },
-    "gpu_power_w_mean": 155.5,
-    "rounds": [
-     {
-      "aggregate": 18.04,
-      "tokens": 3444,
-      "ttft_max": 122.96,
-      "finish": [
        "stop"
       ]
      },
      {
-      "aggregate": 17.8,
-      "tokens": 4164,
-      "ttft_max": 153.37,
-      "finish": [
-       "length",
-       "stop"
-      ]
-     },
-     {
-      "aggregate": 17.14,
-      "tokens": 3521,
-      "ttft_max": 45.56,
+      "aggregate": 16.73,
+      "tokens": 1072,
+      "ttft_max": 0.46,
       "finish": [
        "length"
-      ]
-     }
-    ]
-   },
-   "C3": {
-    "aggregate": {
-     "median": 17.78,
-     "min": 17.63,
-     "max": 17.96,
-     "n": 3,
-     "all": [
-      17.96,
-      17.78,
-      17.63
-     ]
-    },
-    "per_stream_mean": {
-     "median": 52.45,
-     "min": 49.76,
-     "max": 55.57,
-     "n": 3,
-     "all": [
-      49.76,
-      52.45,
-      55.57
-     ]
-    },
-    "gpu_power_w_mean": 155.5,
-    "rounds": [
-     {
-      "aggregate": 17.96,
-      "tokens": 4835,
-      "ttft_max": 179.16,
-      "finish": [
-       "stop"
-      ]
-     },
-     {
-      "aggregate": 17.78,
-      "tokens": 5304,
-      "ttft_max": 213.35,
-      "finish": [
-       "length",
-       "stop"
-      ]
-     },
-     {
-      "aggregate": 17.63,
-      "tokens": 7362,
-      "ttft_max": 259.81,
-      "finish": [
-       "length",
-       "stop"
-      ]
-     }
-    ]
-   },
-   "C4": {
-    "aggregate": {
-     "median": 17.78,
-     "min": 17.42,
-     "max": 17.78,
-     "n": 3,
-     "all": [
-      17.78,
-      17.78,
-      17.42
-     ]
-    },
-    "per_stream_mean": {
-     "median": 51.03,
-     "min": 50.73,
-     "max": 72.6,
-     "n": 3,
-     "all": [
-      50.73,
-      51.03,
-      72.6
-     ]
-    },
-    "gpu_power_w_mean": 155.8,
-    "rounds": [
-     {
-      "aggregate": 17.78,
-      "tokens": 8204,
-      "ttft_max": 336.55,
-      "finish": [
-       "length",
-       "stop"
-      ]
-     },
-     {
-      "aggregate": 17.78,
-      "tokens": 8457,
-      "ttft_max": 320.51,
-      "finish": [
-       "length",
-       "stop"
-      ]
-     },
-     {
-      "aggregate": 17.42,
-      "tokens": 7867,
-      "ttft_max": 288.9,
-      "finish": [
-       "length",
-       "stop"
       ]
      }
     ]
    },
    "C1@32k": {
     "aggregate": {
-     "median": 12.72,
-     "min": 12.61,
-     "max": 12.73,
+     "median": 15.32,
+     "min": 15.31,
+     "max": 15.34,
      "n": 3,
      "all": [
-      12.73,
-      12.72,
-      12.61
+      15.34,
+      15.31,
+      15.32
      ]
     },
     "per_stream_mean": null,
     "gpu_power_w_mean": null,
     "rounds": [
      {
-      "aggregate": 12.73,
-      "tokens": 661,
-      "ttft_max": 32.21,
+      "aggregate": 15.34,
+      "tokens": 354,
+      "ttft_max": 31.43,
       "finish": [
-       "length"
+       "stop"
       ]
      },
      {
-      "aggregate": 12.72,
-      "tokens": 656,
-      "ttft_max": 32.3,
+      "aggregate": 15.31,
+      "tokens": 782,
+      "ttft_max": 31.54,
       "finish": [
-       "length"
+       "stop"
       ]
      },
      {
-      "aggregate": 12.61,
-      "tokens": 640,
-      "ttft_max": 32.21,
+      "aggregate": 15.32,
+      "tokens": 1884,
+      "ttft_max": 31.45,
       "finish": [
-       "length"
+       "stop"
       ]
      }
     ]
@@ -400,13 +241,6 @@
   "server_args": null,
   "gates": null
  },
- "needs_measured": {
-  "samples": 21493,
-  "mem_available_start_gb": 55.36,
-  "mem_available_min_gb": 20.49,
-  "host_ram_drop_peak_gb": 34.87,
-  "swap_used_max_gb": 10.2,
-  "gpu_used_peak_mib": 16004.0
- },
+ "needs_measured": null,
  "notes": ""
 }

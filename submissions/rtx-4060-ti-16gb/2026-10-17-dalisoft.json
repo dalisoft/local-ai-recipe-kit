@@ -96,7 +96,7 @@
  },
  "speed": {
   "status": "DONE",
-  "config": "ninfer DFlash2 K=7 (rk4v4-e8, 100k); TRIPLICATE reps=3 dec-reps=3; submission update for PR #10",
+  "config": "ninfer DFlash2 K=7 (rk4v4-e8, 100k); TRIPLICATE reps=3 dec-reps=3; submission update for PR #10; Decode rates are per-stream server-timed (median of 3); the sweep aggregate field undercounts on stop-ended streams (known harness bug, cross-verified live usage==predicted_n).",
   "prefill": {
    "8192": {
     "median": 1147.1,
